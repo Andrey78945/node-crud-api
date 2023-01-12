@@ -1,0 +1,36 @@
+{
+  "name": "crud-api",
+  "version": "1.0.0",
+  "description": "CRUD-API",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "npx nodemon",
+    "start": "npm run build && node build/main",
+    "build": "npx tsc",
+    "lint": "npx eslint ./src",
+    "format": "npx eslint ./src --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andrey78945/node-crud-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Andrey78945/node-crud-api/issues"
+  },
+  "homepage": "https://github.com/Andrey78945/node-crud-api#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "eslint": "^8.31.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  }
+}
