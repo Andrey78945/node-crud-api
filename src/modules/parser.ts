@@ -1,5 +1,3 @@
-// import { Request } from "../types.js";
-
 import { IncomingMessage } from "node:http";
 import { validate as uuidValidate } from 'uuid';
 

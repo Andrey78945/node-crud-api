@@ -33,6 +33,10 @@ class AppController {
                         response.statusMessage=ErrorCode.USER_ID_INVALID
                         response.end(JSON.stringify({}));
                     }
+                } else {
+                    response.statusCode = StatusCode.NOT_FOUND
+                    response.statusMessage=ErrorCode.ENDPOINT_INVALID
+                    response.end()
                 }
                 break
             }
@@ -51,15 +55,36 @@ class AppController {
                       }
                     })
                 }
+                else {
+                    response.statusCode = StatusCode.NOT_FOUND
+                    response.statusMessage=ErrorCode.ENDPOINT_INVALID
+                    response.end()
+                }
                 break
             }
             case 'DELETE': {
                 if (request.url?.startsWith('/api/users/')) {
                     const inputId: string = parseUrl(request.url)
                     if (isUuid(inputId)) {
-                        this.db.deleteUser(inputId)
-                        response.end(JSON.stringify({}))
+                        if (!this.db.getUser(inputId)) {
+                            response.statusCode = StatusCode.NOT_FOUND
+                            response.statusMessage=ErrorCode.USER_NOT_FOUND
+                            response.end(JSON.stringify({}))
+                        } else {
+                            this.db.deleteUser(inputId)
+                            response.statusCode = StatusCode.ENTRY_DELETED
+                            response.end(JSON.stringify({}))
+                        }
+                    } else {
+                        response.statusCode = StatusCode.BAD_REQUEST
+                        response.statusMessage=ErrorCode.USER_ID_INVALID
+                        response.end(JSON.stringify({}));
                     }
+                }
+                else {
+                    response.statusCode = StatusCode.NOT_FOUND
+                    response.statusMessage=ErrorCode.ENDPOINT_INVALID
+                    response.end()
                 }
                 break
             }
@@ -76,10 +101,28 @@ class AppController {
                                     if (userUpdate.hobbies) user.hobbies = userUpdate.hobbies
                                     response.end(JSON.stringify(user))
                                 })
+                        } else {
+                            response.statusCode = StatusCode.NOT_FOUND
+                            response.statusMessage=ErrorCode.USER_NOT_FOUND
+                            response.end(JSON.stringify({}))
                         }
+                    } else {
+                        response.statusCode = StatusCode.BAD_REQUEST
+                        response.statusMessage=ErrorCode.USER_ID_INVALID
+                        response.end(JSON.stringify({}));
                     }
                 }
+                else {
+                    response.statusCode = StatusCode.NOT_FOUND
+                    response.statusMessage=ErrorCode.ENDPOINT_INVALID
+                    response.end()
+                }
                 break
+            }
+            default: {
+                response.statusCode = StatusCode.NOT_FOUND
+                response.statusMessage=ErrorCode.METHOD_INVALID
+                response.end()
             }
         }
     }

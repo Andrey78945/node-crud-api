@@ -23,16 +23,7 @@ export class DataBase {
         return user
     }
 
-    updateUser(id: string, map: Map<string, string>): void {
-        const user = this.getUser(id)
-        if (user) {
-            if (map.has("username")) user.username = map.get("username") as string
-            if (map.has("age"))user.age = Number(map.get("age"))
-            if (map.has("hobbies"))user.hobbies = JSON.parse(map.get("hobbies") as string)
-        }
-    }
-
-    deleteUser(id: string) {
+    deleteUser(id: string): void {
         const user = this.getUser(id)
         if (user) {
             const index: number = this.users.indexOf(user)

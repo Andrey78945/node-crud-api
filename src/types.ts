@@ -21,7 +21,8 @@ export const enum StatusCode {
     ENTRY_CREATED = 201,
     ENTRY_DELETED = 204,
     BAD_REQUEST = 400,
-    NOT_FOUND = 404
+    NOT_FOUND = 404,
+    INNER_ERROR = 500
 }
 
 export const enum ErrorCode {
@@ -30,5 +31,6 @@ export const enum ErrorCode {
     REQUEST_INVALID = 'Request does not contain required fields',
     REQUEST_FORMAT_INVALID = 'Request format is not JSON',
     METHOD_INVALID = 'Method of request is not valid for API',
+    ENDPOINT_INVALID = 'Endpoint of request is not valid for API',
     ERROR = 'Something happened, try later'
 }
