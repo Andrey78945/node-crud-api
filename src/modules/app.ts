@@ -12,9 +12,8 @@ class App {
 
     start(): void {
             const PORT = process.env.PORT || 4000
-            const server = createServer((request: IncomingMessage, response: ServerResponse) => {
-                const answer: string = this.controller.resolveRequest(request, response)
-                response.end(answer);
+            const server = createServer((request: IncomingMessage, response: ServerResponse): void => {
+                this.controller.resolveRequest(request, response)
             });
 
             server.listen(PORT, (): void => {
