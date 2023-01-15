@@ -1,5 +1,5 @@
 import { IncomingMessage, ServerResponse } from "node:http";
-import { NewUser, User } from "../types.js";
+import { ErrorCode, NewUser, StatusCode, User } from "../types.js";
 import { DataBase } from "./databse.js";
 import getJSONDataFromRequestStream, { isUuid, parseUrl } from "./parser.js";
 
@@ -15,13 +15,23 @@ class AppController {
             case 'GET': {
                 if (request.url === '/api/users') {
                     const users: User[] = this.db.getUsers()
+                    response.statusCode = StatusCode.OK
                     response.end(JSON.stringify(users))
-                    response.statusCode=200
                 } else if (request.url?.startsWith('/api/users/')) {
                     const inputId: string = parseUrl(request.url)
                     if (isUuid(inputId)) {
                         const user: User | undefined = this.db.getUser(inputId)
+                        if (!user) {
+                            response.statusCode = StatusCode.NOT_FOUND
+                            response.statusMessage=ErrorCode.USER_NOT_FOUND
+                            response.end(JSON.stringify({}))
+                        }
+                        response.statusCode = StatusCode.OK
                         response.end(JSON.stringify(user))
+                    } else {
+                        response.statusCode = StatusCode.BAD_REQUEST
+                        response.statusMessage=ErrorCode.USER_ID_INVALID
+                        response.end();
                     }
                 }
                 break
