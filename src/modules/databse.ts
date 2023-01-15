@@ -1,18 +1,4 @@
-import {v4 as uuidv4} from "uuid"
-
-export class User {
-    id: string
-    username: string
-    age: number
-    hobbies: string[]
-
-    constructor(map: Map<string, string>) {
-        this.id = uuidv4();
-        this.username = map.get("username") as string
-        this.age = Number(map.get("age"))
-        this.hobbies = JSON.parse(map.get("hobbies") as string)
-    }
-}
+import { User } from "../types.js";
 
 export class DataBase {
     private users: User[]

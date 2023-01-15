@@ -1,4 +1,4 @@
-import { DataBase, User } from "./databse.js";
+import { DataBase } from "./databse.js";
 
 class AppController {
     db: DataBase

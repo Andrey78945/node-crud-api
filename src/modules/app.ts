@@ -6,7 +6,7 @@ class App {
  //   controller: AppController;
 
     start(): void {
-        const PORT = process.env.PORT
+        const PORT = process.env.PORT || 4000
         const server = http.createServer()
 
         server.listen(PORT, (): void => {
