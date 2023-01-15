@@ -31,7 +31,7 @@ class AppController {
                     } else {
                         response.statusCode = StatusCode.BAD_REQUEST
                         response.statusMessage=ErrorCode.USER_ID_INVALID
-                        response.end();
+                        response.end(JSON.stringify({}));
                     }
                 }
                 break
@@ -40,8 +40,15 @@ class AppController {
                 if (request.url === '/api/users') {
                     getJSONDataFromRequestStream<NewUser>(request)
                     .then(user => {
-                      const newUser = this.db.addUser(user);
-                      response.end(JSON.stringify(newUser))
+                      if (user.age && user.username && user.hobbies) {
+                        const newUser = this.db.addUser(user);
+                        response.statusCode = StatusCode.ENTRY_CREATED
+                        response.end(JSON.stringify(newUser))
+                      } else {
+                        response.statusCode = StatusCode.BAD_REQUEST
+                        response.statusMessage=ErrorCode.REQUEST_INVALID
+                        response.end(JSON.stringify({}));
+                      }
                     })
                 }
                 break
