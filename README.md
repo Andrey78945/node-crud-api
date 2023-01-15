@@ -312,7 +312,7 @@ Updates attributes of specified user.
     **Content:**
     ```json
     {
-      "id": " 8a6e0804-2bd0-4672-b79d-d97027f9071a",
+      "id": "8a6e0804-2bd0-4672-b79d-d97027f9071a",
       "username": "Max",
       "age": 56,
       "hobbies": ["sport", "TV"] || []

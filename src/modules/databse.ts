@@ -1,4 +1,4 @@
-import { User } from "../types.js";
+import { NewUser, User } from "../types.js";
 
 export class DataBase {
     private users: User[]
@@ -17,9 +17,10 @@ export class DataBase {
         }
     }
 
-    addUser(map: Map<string, string>): void {
-        const user = new User(map)
+    addUser(newUser: NewUser): User {
+        const user = new User(newUser)
         this.users.push(user)
+        return user
     }
 
     updateUser(id: string, map: Map<string, string>): void {

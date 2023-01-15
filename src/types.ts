@@ -6,24 +6,12 @@ export class User {
     age: number
     hobbies: string[]
 
-    constructor(map: Map<string, string>) {
+    constructor(newUser: NewUser) {
         this.id = uuidv4();
-        this.username = map.get("username") as string
-        this.age = Number(map.get("age"))
-        this.hobbies = JSON.parse(map.get("hobbies") as string)
+        this.username = newUser.username
+        this.age = newUser.age
+        this.hobbies = newUser.hobbies
     }
 }
 
 export type NewUser = Omit<User, 'id'>
-
-export const enum Method {
-    GET,
-    POST,
-    PUT,
-    DELETE
-}
-
-// export const enum StatusCode {
-//     "200",
-//     "400",
-// }
