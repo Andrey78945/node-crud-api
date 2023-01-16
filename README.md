@@ -8,7 +8,7 @@ Api for Rolling Scopes School task "CRUD API" (https://github.com/AlreadyBored/n
 - Clone this repo: `$ git clone https://github.com/Andrey78945/node-crud-api.git`.
 - Go to downloaded folder: `$ cd node-crud-api`.
 - Install dependencies: `$ npm install`.
-- Rename file ".env.test" in ".env".
+- Copy and Rename file ".env.test" in ".env".
 - Start server: `$ npm start:dev`.
 - Now you can send requests to the address: `http://127.0.0.1:4000`.
 
